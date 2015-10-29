@@ -29,12 +29,40 @@ public class Survey {
 		
 		//ArrayList<Row> websites = new ArrayList<Row>() ;
 		
-		//SSLSocket socket;
+		SSLSocket socket;
+		int port = 443;			//standard port for SSL websites
+		int timeout = 3000; 	//3 second timeout 
+		PrintWriter requestWriter = null;
+		BufferedReader socketInputStream = null;
+		String socketLine;
 		
-		//for(Row r: websites){
+		for(Row r: websites){
 			
+			String host = r.getHost();
 			
-		//}
+			try{
+				
+				socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket();
+				socket.connect(new InetSocketAddress(host, port), timeout);
+				
+				requestWriter= (new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+				requestWriter.println("GET / HTTP/1.1");
+				requestWriter.println("Host: " + host);
+				requestWriter.println("Accept: */*");
+				requestWriter.println("User-Agent: Test");
+				requestWriter.println(""); // needed to end a request
+				requestWriter.flush();				
+				
+				socketInputStream = new BufferedReader (new InputStreamReader(socket.getInputStream()));
+				
+				while((socketLine) = socketInputStream.readLine()) != null){
+					
+				}
+				
+			}catch(Exception e){
+				
+			}
+		}
 		
 		
 		
