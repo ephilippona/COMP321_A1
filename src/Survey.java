@@ -27,7 +27,7 @@ public class Survey {
 
 	public static void main(String[] args) {
 		
-		//ArrayList<Row> websites = new ArrayList<Row>() ;
+		ArrayList<Website> websites = new ArrayList<Website>() ;
 		
 		SSLSocket socket;
 		int port = 443;			//standard port for SSL websites
@@ -36,16 +36,16 @@ public class Survey {
 		BufferedReader socketInputStream = null;
 		String socketLine;
 		
-		for(Row r: websites){
+		for(Website w: websites){
 			
-			String host = r.getHost();
+			String host = w.getHost();
 			
 			try{
 				
 				socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket();
 				socket.connect(new InetSocketAddress(host, port), timeout);
 				
-				requestWriter= (new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+				requestWriter= (new PrintWriter(new OutputStreamWriter(socket.getOutputStream())));
 				requestWriter.println("GET / HTTP/1.1");
 				requestWriter.println("Host: " + host);
 				requestWriter.println("Accept: */*");
@@ -55,7 +55,9 @@ public class Survey {
 				
 				socketInputStream = new BufferedReader (new InputStreamReader(socket.getInputStream()));
 				
-				while((socketLine) = socketInputStream.readLine()) != null){
+				while((socketLine = socketInputStream.readLine()) != null){
+					if(socketLine.isEmpty())
+						return;
 					
 				}
 				
