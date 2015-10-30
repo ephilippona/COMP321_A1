@@ -19,7 +19,7 @@ public class driver {
 	public static void main(String[] args){
 		
 		ReadCSV me=new ReadCSV();
-		System.out.print(me.getWebsites().size());
+		System.out.print(me.getWebsites().get(3000).getHost());
 		
 		
 		
