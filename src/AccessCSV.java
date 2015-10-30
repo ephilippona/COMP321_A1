@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -18,7 +19,27 @@ public class AccessCSV {
 	websites=new <Website>ArrayList();
 	read(getStartIndex(29070117),getStartIndex(26225497));
 	}
-
+	
+	public void write(String ...text){
+		
+		try {
+			  FileWriter output = new FileWriter("./src/output.csv",true); //the true will append the new data
+			  String line="";
+			  int counter=0;
+			  for(String a:text){
+				  if(text.length!=counter)line+=a+",";
+				  else line+=a;
+				  counter++;
+				  
+			  }
+			  output.write(line,0,line.length());
+			  output.flush();
+			  output.close();
+			}
+			catch(IOException e) {
+			  e.printStackTrace();
+			}
+	}
 
 	public ArrayList<Website> getWebsites(){
 		return this.websites;}

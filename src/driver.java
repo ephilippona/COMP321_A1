@@ -20,7 +20,7 @@ public class driver {
 		
 		AccessCSV me=new AccessCSV();
 		System.out.print(me.getWebsites().get(3000).getHost());
-		
+		me.write("host.com","try", "this");
 		
 		
 	}
