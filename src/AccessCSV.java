@@ -16,7 +16,7 @@ public class AccessCSV {
 	private ArrayList<Website> websites;	
 	
 	AccessCSV(){
-	websites=new <Website>ArrayList();
+	websites=new ArrayList<Website>();
 	read(getStartIndex(29070117),getStartIndex(26225497));
 	}
 	
