@@ -11,18 +11,34 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
-public class ReadCSV {
+public class AccessCSV {
 	private ArrayList<Website> websites;	
-ReadCSV(){
+	
+	AccessCSV(){
 	websites=new <Website>ArrayList();
-	run(getStartIndex(29070117),getStartIndex(26225497));
-}
+	read(getStartIndex(29070117),getStartIndex(26225497));
+	}
 
 
-public ArrayList<Website> getWebsites(){
-	return this.websites;}
+	public ArrayList<Website> getWebsites(){
+		return this.websites;}
 
-  public void run(int index1,int index2) {
+	
+	//Method to generate starting index
+	private static int getStartIndex (int studentId)  {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance ("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		md.update( new Integer ( studentId ).toString () . getBytes () );
+		BigInteger bi = new BigInteger (1 , md.digest () );
+		return bi.mod(new BigInteger ("9890")).multiply (new BigInteger("100")).intValue()+1000;
+		}
+	
+  public void read(int index1,int index2) {
 
 	String csvFile = "/src/top-1m.csv";
 	BufferedReader br = null;
@@ -61,18 +77,7 @@ public ArrayList<Website> getWebsites(){
 
 	System.out.println("Done");
   }
-	//Method to generate starting index
-	private static int getStartIndex (int studentId)  {
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance ("SHA-256");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		md.update( new Integer ( studentId ).toString () . getBytes () );
-		BigInteger bi = new BigInteger (1 , md.digest () );
-		return bi.mod(new BigInteger ("9890")).multiply (new BigInteger("100")).intValue()+1000;
-		}
+  
+
 }
 
