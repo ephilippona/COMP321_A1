@@ -1,6 +1,7 @@
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,16 +13,19 @@ import java.util.ArrayList;
 
 
 public class ReadCSV {
-	ArrayList<Website> websites;	
+	private ArrayList<Website> websites;	
 ReadCSV(){
-	ReadCSV obj = new ReadCSV();
 	websites=new <Website>ArrayList();
-	obj.run(getStartIndex(29070117),getStartIndex(26225497));
+	run(getStartIndex(29070117),getStartIndex(26225497));
 }
+
+
+public ArrayList<Website> getWebsites(){
+	return this.websites;}
 
   public void run(int index1,int index2) {
 
-	String csvFile = "./top-1m.csv";
+	String csvFile = "/src/top-1m.csv";
 	BufferedReader br = null;
 	String line = "";
 	String cvsSplitBy = ",";
@@ -29,12 +33,15 @@ ReadCSV(){
 	try {
 
 
-		br = new BufferedReader(new FileReader(csvFile));
+		br = new BufferedReader(new FileReader(new File("").getAbsolutePath().concat(csvFile)));
 		while ((line = br.readLine()) != null) {
+			
 			// use comma as separator
 			String[] siteInfo = line.split(cvsSplitBy);
-				websites.add(new Website(Integer.parseInt(siteInfo[0]),siteInfo[1]));
-				System.out.println(siteInfo[0]+","+siteInfo[1]);
+			int index_value=Integer.parseInt(siteInfo[0]);
+			if((1<=index_value)&&(1000>=index_value)||(index1<=index_value)&&((index1+9999)>=index_value)||((index2<=index_value)&&((index2+9999)>=index_value))){
+				websites.add(new Website(index_value,siteInfo[1]));
+				System.out.println(siteInfo[0]+","+siteInfo[1]);}
 		}
 
 	
