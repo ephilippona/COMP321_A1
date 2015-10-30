@@ -27,9 +27,10 @@ public class AccessCSV {
 			  String line="";
 			  int counter=0;
 			  for(String a:text){
-				  if(text.length!=counter)line+=a+",";
-				  else line+=a;
 				  counter++;
+				  if(text.length!=counter)line+=a+",";
+				  else line+=a+"\r\n";
+				  
 				  
 			  }
 			  output.write(line,0,line.length());

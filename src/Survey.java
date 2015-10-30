@@ -26,8 +26,9 @@ import java.io.IOException;
 public class Survey {
 
 	public static void main(String[] args) {
-		
-		ArrayList<Website> websites = new ArrayList<Website>() ;
+		AccessCSV Test=new AccessCSV();
+		ArrayList<Website> websites=Test.getWebsites();
+		//ArrayList<Website> websites = new ArrayList<Website>() ;
 		
 		SSLSocket socket;
 		int port = 443;			//standard port for SSL websites
@@ -51,7 +52,10 @@ public class Survey {
 				requestWriter.println("Accept: */*");
 				requestWriter.println("User-Agent: Test");
 				requestWriter.println(""); // needed to end a request
-				requestWriter.flush();				
+				requestWriter.flush();	
+				
+				Test.write(w.getIndex()+"",host);
+				
 				
 				socketInputStream = new BufferedReader (new InputStreamReader(socket.getInputStream()));
 				
