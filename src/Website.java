@@ -8,6 +8,7 @@ private String SSLVersion;
 private String keyType;
 private String signatureAlgo;
 private int keySize;
+private boolean isHTTPS;
 
 Website(int index, String host){
 	this.index=index;
@@ -18,6 +19,7 @@ Website(int index, String host){
 	this.keyType = null;
 	this.signatureAlgo = null;
 	this.keySize = -1;
+	this.isHTTPS = true;
 }
 
 String getHost(){
@@ -52,8 +54,13 @@ public void setSignatureAlgo(String signatureAlgo) {
 	this.signatureAlgo = signatureAlgo;
 }
 
+public void setHTTPS(boolean isHTTPS) {
+	this.isHTTPS = isHTTPS;
+}
+
 void printWebsiteInfo(){
 	System.out.println(this.index + " => " + this.host);
+	System.out.println("Is HTTPS           : " + this.isHTTPS);
 	System.out.println("Is HSTS            : " + this.isHSTS);
 	System.out.println("Is HSTS Long       : " + this.isHSTSLong);
 	System.out.println("SSL Version        : " + this.SSLVersion);

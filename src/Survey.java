@@ -30,7 +30,7 @@ public class Survey {
 	public static void main(String[] args) {
 		//AccessCSV Test=new AccessCSV();
 		//ArrayList<Website> websites=Test.getWebsites();
-		ArrayList<Website> websites = new ArrayList<Website>() ;
+//		ArrayList<Website> websites = new ArrayList<Website>() ;
 		
 		websites.add(new Website(0,"www.facebook.com"));
 		SSLSocket socket;
@@ -64,11 +64,11 @@ public class Survey {
 				socketInputStream = new BufferedReader (new InputStreamReader(socket.getInputStream()));
 				
 				while((socketLine = socketInputStream.readLine()) != null){
-//					System.out.println(socketLine);
 
 					if(socketLine.isEmpty()){
 					}
-					else if(socketLine.contains("Strict-Transport-Security")){
+					//If HSTS is supported
+					else if(socketLine.contains("Strict-Transport-Security")){ 
 						//HSTS is supported by w
 						w.setIsHSTS(true);
 
@@ -92,6 +92,7 @@ public class Survey {
 					socketInputStream.close();
 					
 					SSLSession session = socket.getSession();
+					//Retrieve Session information 
 					if(session != null){
 						w.setSSLVersion(session.getProtocol());
 					
@@ -113,8 +114,31 @@ public class Survey {
 				
 
 			}	
-			catch(Exception e){
-				
+			catch (SSLException e) {
+				w.setHTTPS(false);
+				System.out.println("ERROR----SSLException");
+				System.out.println(w.toString());
+				//e.printStackTrace();
+			} catch (SocketTimeoutException e) {
+				w.setHTTPS(false);
+				System.out.println("ERROR----SocketTimeoutException");
+				System.out.println(w.toString());
+				//e.printStackTrace();
+			} catch (ConnectException e) {
+				w.setHTTPS(false);
+				System.out.println("ERROR----ConnectException");
+				System.out.println(w.toString());
+				//e.printStackTrace();
+			} catch (UnknownHostException e) {
+				w.setHTTPS(false);
+				System.out.println("ERROR----UnknownHostException");
+				System.out.println(w.toString());
+				//e.printStackTrace();
+			} catch (IOException e) {
+				w.setHTTPS(false);
+				System.out.println("ERROR----IOException");
+				System.out.println(w.toString());
+				//e.printStackTrace();
 			}
 			w.printWebsiteInfo();
 		}
