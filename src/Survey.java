@@ -28,11 +28,11 @@ public class Survey {
 	public static int monthInSeconds = 2592000;
 	
 	public static void main(String[] args) {
-		//AccessCSV Test=new AccessCSV();
-		//ArrayList<Website> websites=Test.getWebsites();
-//		ArrayList<Website> websites = new ArrayList<Website>() ;
+		AccessCSV Test=new AccessCSV();
+		ArrayList<Website> websites=Test.getWebsites();
+		//ArrayList<Website> websites = new ArrayList<Website>() ;
 		
-		websites.add(new Website(0,"www.facebook.com"));
+		//websites.add(new Website(0,"www.facebook.com"));
 		SSLSocket socket;
 		int port = 443;			//standard port for SSL websites
 		int timeout = 3000; 	//3 second timeout 
@@ -117,30 +117,43 @@ public class Survey {
 			catch (SSLException e) {
 				w.setHTTPS(false);
 				System.out.println("ERROR----SSLException");
+				System.err.println("index: "+w.getIndex());
+				System.err.println("index: "+w.getHost());
 				System.out.println(w.toString());
 				//e.printStackTrace();
 			} catch (SocketTimeoutException e) {
 				w.setHTTPS(false);
 				System.out.println("ERROR----SocketTimeoutException");
+				System.err.println("index: "+w.getIndex());
+				System.err.println("index: "+w.getHost());
 				System.out.println(w.toString());
 				//e.printStackTrace();
 			} catch (ConnectException e) {
 				w.setHTTPS(false);
 				System.out.println("ERROR----ConnectException");
+				System.err.println("index: "+w.getIndex());
+				System.err.println("index: "+w.getHost());
 				System.out.println(w.toString());
 				//e.printStackTrace();
 			} catch (UnknownHostException e) {
 				w.setHTTPS(false);
 				System.out.println("ERROR----UnknownHostException");
+				System.err.println("index: "+w.getIndex());
+				System.err.println("index: "+w.getHost());
 				System.out.println(w.toString());
 				//e.printStackTrace();
 			} catch (IOException e) {
 				w.setHTTPS(false);
 				System.out.println("ERROR----IOException");
+				System.err.println("index: "+w.getIndex());
+				System.err.println("index: "+w.getHost());
 				System.out.println(w.toString());
 				//e.printStackTrace();
 			}
 			w.printWebsiteInfo();
+			Test.write(w.index+"",w.host,""+w.isHTTPS,""+w.SSLVersion,w.keyType,w.keySize+"",w.signatureAlgo,""+w.isHSTS,""+w.isHSTSLong);
+			
+		
 		}
 		
 		

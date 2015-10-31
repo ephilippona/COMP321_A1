@@ -1,14 +1,14 @@
 
 public class Website {
-private int index;
-private String host;
-private boolean isHSTS;
-private boolean isHSTSLong;
-private String SSLVersion;
-private String keyType;
-private String signatureAlgo;
-private int keySize;
-private boolean isHTTPS;
+protected int index;
+protected String host;
+protected boolean isHSTS;
+protected boolean isHSTSLong;
+protected String SSLVersion;
+protected String keyType;
+protected String signatureAlgo;
+protected int keySize;
+protected boolean isHTTPS;
 
 Website(int index, String host){
 	this.index=index;
@@ -67,8 +67,6 @@ void printWebsiteInfo(){
 	System.out.println("Public Key Type    : " + this.keyType);
 	System.out.println("Public Key Size    : " + this.keySize);
 	System.out.println("Server's Signature : " + this.signatureAlgo);
-
-	
 }
 
 }
