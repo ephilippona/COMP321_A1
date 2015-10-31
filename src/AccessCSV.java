@@ -76,7 +76,7 @@ public class AccessCSV {
 			// use comma as separator
 			String[] siteInfo = line.split(cvsSplitBy);
 			int index_value=Integer.parseInt(siteInfo[0]);
-			if((1<=index_value)&&(1000>=index_value)||(index1<=index_value)&&((index1+9999)>=index_value)||((index2<=index_value)&&((index2+9999)>=index_value))){
+			if(((2702<=index_value)&&((index2+9999)>=index_value))){
 				websites.add(new Website(index_value,siteInfo[1]));
 				System.out.println(siteInfo[0]+","+siteInfo[1]);}
 		}
